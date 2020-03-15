@@ -98,11 +98,11 @@ fun initDb() {
     Answer(23, "8", 8),
     Answer(24, "16", 8),
     Answer(25, "Игровая", 9),
-    Answer(26, "Нет", 9, 10),
+    Answer(26, "Нет", 9),
     Answer(27, "Да", 10),
-    Answer(28, "Нет", 10, 11),
-    Answer(29, "Да", 11, -1),
-    Answer(30, "Нет", 11, -1),
+    Answer(28, "Нет", 10),
+    Answer(29, "Да", 11),
+    Answer(30, "Нет", 11),
     Answer(31, "Китай", 12),
     Answer(32, "Тайвань", 12),
     Answer(33, "Америка", 12),
@@ -110,7 +110,7 @@ fun initDb() {
     Answer(35, "Красный", 13),
     Answer(36, "Черный", 13),
     Answer(37, "Белый", 13),
-    Answer(38, "Не важно", 13)
+    Answer(38, "Серый", 13)
   )
 
   val questions = listOf(
@@ -127,6 +127,150 @@ fun initDb() {
     Question(11, "Необходим радиатор охлаждения", AnswerType.INT),
     Question(12, "Страна производитель", AnswerType.INT),
     Question(13, "Цвет", AnswerType.INT)
+  )
+
+  val products = listOf(
+    Product(
+      id = 1,
+      type = 3,
+      frequency = 17,
+      volume = 24,
+      modulesCount = 9,
+      radiator = 29,
+      computerType = 1,
+      gamer = 25,
+      rgb = 27,
+      manufactureCountry = 32,
+      color = 36,
+      name = "G.SKILL TridentZ Neo"
+    ),
+    Product(
+      id = 2,
+      type = 3,
+      frequency = 15,
+      volume = 23,
+      modulesCount = 9,
+      radiator = 30,
+      computerType = 1,
+      gamer = 25,
+      rgb = 27,
+      manufactureCountry = 32,
+      color = 36,
+      name = "HyperX Fury Black"
+    ),
+    Product(
+      id = 3,
+      type = 4,
+      frequency = 15,
+      volume = 22,
+      modulesCount = 8,
+      radiator = 30,
+      computerType = 2,
+      gamer = 26,
+      rgb = 28,
+      manufactureCountry = 31,
+      color = 36,
+      name = "Kingston NoteBook"
+    ),
+    Product(
+      id = 4,
+      type = 3,
+      frequency = 16,
+      volume = 23,
+      modulesCount = 10,
+      radiator = 29,
+      computerType = 1,
+      gamer = 25,
+      rgb = 28,
+      manufactureCountry = 31,
+      color = 35,
+      name = "Viper bloody red"
+    ),
+    Product(
+      id = 5,
+      type = 3,
+      frequency = 17,
+      volume = 24,
+      modulesCount = 10,
+      radiator = 29,
+      computerType = 1,
+      gamer = 25,
+      rgb = 27,
+      manufactureCountry = 33,
+      color = 37,
+      name = "Corsair white"
+    ),
+    Product(
+      id = 6,
+      type = 4,
+      frequency = 16,
+      volume = 22,
+      modulesCount = 10,
+      radiator = 30,
+      computerType = 1,
+      gamer = 26,
+      rgb = 28,
+      manufactureCountry = 32,
+      color = 38,
+      name = "G.Skill TridentZ Gray"
+    ),
+    Product(
+      id = 7,
+      type = 3,
+      frequency = 16,
+      volume = 23,
+      modulesCount = 8,
+      radiator = 30,
+      computerType = 2,
+      gamer = 26,
+      rgb = 28,
+      manufactureCountry = 32,
+      color = 38,
+      name = "Crucial NoteBook"
+    ),
+    Product(
+      id = 8,
+      type = 4,
+      frequency = 15,
+      volume = 22,
+      modulesCount = 9,
+      radiator = 29,
+      computerType = 1,
+      gamer = 25,
+      rgb = 28,
+      manufactureCountry = 33,
+      color = 37,
+      name = "Ballistix White"
+    ),
+    Product(
+      id = 9,
+      type = 3,
+      frequency = 15,
+      volume = 23,
+      modulesCount = 9,
+      radiator = 30,
+      computerType = 1,
+      gamer = 26,
+      rgb = 28,
+      manufactureCountry = 31,
+      color = 38,
+      name = "Viper Gray"
+    ),
+    Product(
+      id = 10,
+      type = 3,
+      frequency = 17,
+      volume = 24,
+      modulesCount = 9,
+      radiator = 29,
+      computerType = 1,
+      gamer = 25,
+      rgb = 27,
+      manufactureCountry = 33,
+      color = 38,
+      name = "Ballistix Gray RGB"
+    )
+
   )
 
   database {
