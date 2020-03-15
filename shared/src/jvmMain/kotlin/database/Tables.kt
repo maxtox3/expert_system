@@ -4,13 +4,6 @@ import model.*
 import org.jetbrains.exposed.dao.IntIdTable
 import org.jetbrains.exposed.sql.ResultRow
 
-object Posts : IntIdTable() {
-  val postId = integer("postId")
-  val userId = integer("userId")
-  val title = varchar("title", 50)
-  val body = varchar("body", 255)
-}
-
 object Questions : IntIdTable() {
   val text = varchar("text", 255)
   val ansType = integer("answer_type").default(AnswerType.BOOLEAN.value)
