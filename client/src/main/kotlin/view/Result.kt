@@ -6,53 +6,18 @@ import react.*
 
 class ResultView : RComponent<ResultProps, ResultState>() {
 
-//  lateinit var resultService: ResultService
-
   init {
     state = ResultState()
   }
 
-  override fun componentDidMount() {
-
-//    resultService = ResultService(
-//      coroutineContext = props.coroutineScope.coroutineContext,
-//      parameters = props.parameters,
-//      attributes = props.attributes
-//    )
-//    props.coroutineScope.launch {
-//      val questions = questionsService.getQuestions()
-//
-//      setState {
-//        questionsWithAnswers = questions
-//        currentQuestion = questions.first()
-//      }
-//    }
-  }
-
   override fun RBuilder.render() {
-    mTypography(text = "Hello there, general Kenoby")
-//    val question = props.question
-//    val answers = props.question.answers
-//
-//    mCard {
-//      mCardHeader(title = question.text)
-//      mCardContent {
-//        answers.forEach { answer ->
-//          answerView(answer, onCLickFunction = { props.onAnswerClicked(answer) }) {
-//            css {
-//              marginTop = 1.spacingUnits
-//            }
-//          }
-//        }
-//      }
-//    }
+    mTypography(text = "Ну... это лишь начало. Впереди ждет много злата!")
   }
 }
 
 interface ResultProps : RProps {
   var parameters: List<Answer>
   var attributes: List<Answer>
-  var onAnswerClicked: (Answer) -> Unit
 }
 
 class ResultState : RState {
