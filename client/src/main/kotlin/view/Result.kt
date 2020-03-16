@@ -1,58 +1,50 @@
 package view
 
-import com.ccfraser.muirwik.components.mTypography
-import model.Answer
+import com.ccfraser.muirwik.components.*
+import com.ccfraser.muirwik.components.card.*
+import kotlinx.css.height
+import kotlinx.css.px
 import react.*
+import services.ResultViewModel
+import styled.css
 
 class ResultView : RComponent<ResultProps, ResultState>() {
-
-  lateinit var resultService: ResultService
 
   init {
     state = ResultState()
   }
 
-  override fun componentDidMount() {
+  override fun RBuilder.render() {
 
-    resultService = ResultService(
-      coroutineContext = props.coroutineScope.coroutineContext,
-      parameters = props.parameters,
-      attributes = props.attributes
-    )
-    props.coroutineScope.launch {
-      val questions = questionsService.getQuestions()
-
-      setState {
-        questionsWithAnswers = questions
-        currentQuestion = questions.first()
+    mCard {
+      mCardActionArea {
+        mCardMedia(image = "/${props.result.id}.jpg") {
+          css {
+            height = 140.px
+          }
+        }
+        mCardContent {
+          mTypography(
+            text = "Наиболее подходящий варинат: ${props.result.name}",
+            variant = MTypographyVariant.h5,
+            component = "h2"
+          )
+          props.result.specification.forEach {
+            mTypography(
+              text = "${it.questionText}:  ${it.answerText}",
+              variant = MTypographyVariant.body2,
+              color = MTypographyColor.textSecondary,
+              component = "p"
+            )
+          }
+        }
       }
     }
-  }
-
-  override fun RBuilder.render() {
-    mTypography(text = "Hello there, general Kenoby")
-//    val question = props.question
-//    val answers = props.question.answers
-//
-//    mCard {
-//      mCardHeader(title = question.text)
-//      mCardContent {
-//        answers.forEach { answer ->
-//          answerView(answer, onCLickFunction = { props.onAnswerClicked(answer) }) {
-//            css {
-//              marginTop = 1.spacingUnits
-//            }
-//          }
-//        }
-//      }
-//    }
   }
 }
 
 interface ResultProps : RProps {
-  var parameters: List<Answer>
-  var attributes: List<Answer>
-  var onAnswerClicked: (Answer) -> Unit
+  var result: ResultViewModel
 }
 
 class ResultState : RState {
@@ -60,13 +52,11 @@ class ResultState : RState {
 }
 
 fun RBuilder.resultView(
-  parameters: List<Answer>,
-  attributes: List<Answer>,
+  result: ResultViewModel,
   handler: RHandler<ResultProps> = {}
 ) {
   child(ResultView::class) {
-    attrs.attributes = attributes
-    attrs.parameters = parameters
+    attrs.result = result
     handler()
   }
 }

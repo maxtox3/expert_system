@@ -9,3 +9,9 @@ data class ResultModel(
   val attributes: List<Answer>,
   val userChosenAttributes: List<Answer>
 )
+
+@Serializable
+data class ResultRequest(
+  val attributes: List<Answer>,
+  val parameters: List<Answer>
+)

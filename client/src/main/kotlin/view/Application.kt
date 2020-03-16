@@ -7,10 +7,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.css.padding
 import kotlinx.css.px
-import model.Answer
-import model.Question
+import model.*
 import react.*
-import services.QuestionService
+import services.*
 import styled.*
 
 //val jetbrainsLogo = kotlinext.js.require("@jetbrains/logos/jetbrains/jetbrains-simple.svg")
@@ -24,6 +23,7 @@ private object ApplicationStyles : StyleSheet("ApplicationStyles", isStatic = tr
 class ApplicationComponent : RComponent<ApplicationProps, ApplicationState>() {
 
   private lateinit var questionsService: QuestionService
+  private lateinit var resultService: ResultService
 
   private var themeColor = "light"
 
@@ -33,6 +33,8 @@ class ApplicationComponent : RComponent<ApplicationProps, ApplicationState>() {
 
   override fun componentDidMount() {
     questionsService = QuestionService(props.coroutineScope.coroutineContext)
+    resultService = ResultService(props.coroutineScope.coroutineContext)
+
     props.coroutineScope.launch {
       val questions = questionsService.getQuestions()
 
@@ -64,14 +66,18 @@ class ApplicationComponent : RComponent<ApplicationProps, ApplicationState>() {
             +ApplicationStyles.wrapper
           }
 
-          if (state.ended.not()) {
+          if (state.result == null) {
             state.currentQuestion?.let {
               styledDiv {
                 questionView(question = it, onAnswerClicked = { answer -> onAnswerClicked(answer) })
               }
             }
           } else {
-            resultView(attributes = state.attributes, parameters = state.parameters)
+            state.result?.let {
+              styledDiv {
+                resultView(it)
+              }
+            }
           }
         }
 
@@ -150,8 +156,15 @@ class ApplicationComponent : RComponent<ApplicationProps, ApplicationState>() {
   }
 
   private fun calculateResult() {
-    setState {
-      ended = true
+    props.coroutineScope.launch {
+      val resultModel = resultService.getResult(state.parameters, state.attributes)
+      val resultViewModel = ResultModelToResultViewModelMapper.invoke(
+        resultModel,
+        state.questionsWithAnswers
+      )
+      setState {
+        result = resultViewModel
+      }
     }
   }
 }
@@ -165,6 +178,6 @@ class ApplicationState : RState {
   var attributes: MutableList<Answer> = mutableListOf()
   var parameters: MutableList<Answer> = mutableListOf()
   var currentQuestion: Question? = null
+  var result: ResultViewModel? = null
   var currentQuestionIsSubQuestion: Boolean = false
-  var ended: Boolean = false
 }
