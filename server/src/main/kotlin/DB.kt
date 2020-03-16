@@ -44,7 +44,7 @@ fun initDb() {
   )
 
   val questions = listOf(
-    Question(1, "Память понадобится для", AnswerType.INT),
+    Question(1, "Память для", AnswerType.INT),
     Question(2, "Тип памяти", AnswerType.INT),
     Question(3, "Компьютер (материнская плата) был куплен", AnswerType.INT),
     Question(4, "Количество модулей памяти в комплекте", AnswerType.INT),
@@ -53,8 +53,8 @@ fun initDb() {
     Question(7, "Скорость работы памяти", AnswerType.INT),
     Question(8, "Объем памяти в одном модуле", AnswerType.INT),
     Question(9, "Игровая", AnswerType.BOOLEAN),
-    Question(10, "Необходима RGB подсветка", AnswerType.INT),
-    Question(11, "Необходим радиатор охлаждения", AnswerType.INT),
+    Question(10, "RGB подсветка", AnswerType.INT),
+    Question(11, "Наличие радиатора охлаждения", AnswerType.INT),
     Question(12, "Страна производитель", AnswerType.INT),
     Question(13, "Цвет", AnswerType.INT)
   )
