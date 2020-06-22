@@ -1,8 +1,12 @@
 package view
 
-import com.ccfraser.muirwik.components.mTypography
-import model.Answer
+import com.ccfraser.muirwik.components.*
+import com.ccfraser.muirwik.components.card.*
+import kotlinx.css.height
+import kotlinx.css.px
 import react.*
+import services.ResultViewModel
+import styled.css
 
 class ResultView : RComponent<ResultProps, ResultState>() {
 
@@ -11,13 +15,36 @@ class ResultView : RComponent<ResultProps, ResultState>() {
   }
 
   override fun RBuilder.render() {
-    mTypography(text = "Ну... это лишь начало. Впереди ждет много злата!")
+
+    mCard {
+      mCardActionArea {
+        mCardMedia(image = "/${props.result.id}.jpg") {
+          css {
+            height = 140.px
+          }
+        }
+        mCardContent {
+          mTypography(
+            text = "Наиболее подходящий варинат: ${props.result.name}",
+            variant = MTypographyVariant.h5,
+            component = "h2"
+          )
+          props.result.specification.forEach {
+            mTypography(
+              text = "${it.questionText}:  ${it.answerText}",
+              variant = MTypographyVariant.body2,
+              color = MTypographyColor.textSecondary,
+              component = "p"
+            )
+          }
+        }
+      }
+    }
   }
 }
 
 interface ResultProps : RProps {
-  var parameters: List<Answer>
-  var attributes: List<Answer>
+  var result: ResultViewModel
 }
 
 class ResultState : RState {
@@ -25,13 +52,11 @@ class ResultState : RState {
 }
 
 fun RBuilder.resultView(
-  parameters: List<Answer>,
-  attributes: List<Answer>,
+  result: ResultViewModel,
   handler: RHandler<ResultProps> = {}
 ) {
   child(ResultView::class) {
-    attrs.attributes = attributes
-    attrs.parameters = parameters
+    attrs.result = result
     handler()
   }
 }
